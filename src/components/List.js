@@ -11,8 +11,7 @@ class List extends React.Component {
   async componentDidMount() {
     this.setState({loading: true})
     const res = await request.get(this.props.url).catch(e => null)
-    const ids = !!res ? res.body.slice(0, 102) : []
-    const tmp = this.constructor.eachSlice2(ids, 100)
+    const ids = !!res ? res.body.slice(0, 10) : []
 
     const itemRes = await Promise.all(ids.map(async (id) => await this.getItem(id).catch(e => null)))
     const data = itemRes.filter(res => !!res && !!res.body).map(res => res.body)
